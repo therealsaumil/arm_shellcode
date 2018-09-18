@@ -2,6 +2,7 @@ ARM Shellcode
 =============
 
 1. mprotect egghunter
+---------------------
 
 - Searches for an EGG (4+4 byte value) in the memory of the exploited process.
 - Uses mprotect() to test the presence of pages in the virtual memory space of the target process.
@@ -14,6 +15,7 @@ $mprotect_egghunter = "\x01\x10\x8f\xe2\x11\xff\x2f\xe1\x6d\x40\x7d\x27\x01\x21\
 ```
 
 2. Quantum Leap code
+--------------------
 
 - ARM/Thumb Polyglot code.
 - Can be started in ARM mode or Thumb mode.
